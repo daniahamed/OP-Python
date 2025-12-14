@@ -15,7 +15,7 @@ def run_demo() -> None:
     malik.wallet.deposit(600)
 
     print(f"Wallet Zahra: {zahra.wallet.balance}")
-    print(f"Wallet Malik: {malik.wallet.balance}\n")
+    print(f"Wallet Malik: {malik.wallet.balance}")
 
     python_course = Course("Async Python", 150, mentor_omar)
     oop_course = Course("OOP Fundamentals", 200, mentor_omar)
@@ -35,15 +35,17 @@ def run_demo() -> None:
 
     print("After transfer:")
     print(f"Zahra balance: {zahra.wallet.balance}")
-    print(f"Malik balance: {malik.wallet.balance}\n")
+    print(f"Malik balance: {malik.wallet.balance}")
+
+    print("-------------------------------------")
 
     printer = Resource("3D Printer")
-    lab = Resource("Lab")
+    headset = Resource("Headset")
     laptop = Resource("Laptop")
 
     catalog = ResourceCatalog()
     catalog.add_resource(printer)
-    catalog.add_resource(lab)
+    catalog.add_resource(headset)
     catalog.add_resource(laptop)
 
     print(f"Catalog size: {len(catalog)}")
@@ -55,7 +57,7 @@ def run_demo() -> None:
     print("-------------------------------------")
 
     zahra.borrow_resource(printer, mentor_omar)
-    malik.borrow_resource(lab, mentor_omar)
+    malik.borrow_resource(headset, mentor_omar)
 
     print("-------------------------------------")
 
