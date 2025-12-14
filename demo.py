@@ -63,6 +63,7 @@ def run_demo() -> None:
 
     catalog.allocate(zahra)
     catalog.allocate(malik)
+    malik.borrow_resource(printer, mentor_omar)
 
 
 if __name__ == "__main__":
