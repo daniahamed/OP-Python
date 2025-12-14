@@ -1,8 +1,3 @@
-"""
-Demo script for Campus Resource Hub
-Demonstrates enrollments, wallet operations, and resource allocation.
-"""
-
 from people import Student, PremiumStudent, Mentor, Course
 from managing import Resource, ResourceCatalog
 
