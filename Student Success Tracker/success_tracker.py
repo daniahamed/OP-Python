@@ -4,6 +4,7 @@ from rich.console import Console
 from rich.table import Table
 import argparse
 import datetime
+import re
 
 def init_db():
     with sqlite3.connect("success_tracker.db") as conn:
@@ -26,6 +27,11 @@ def add_student(name: str, email:str, major:str, gpa:float, status:str = "active
     
     if status not in valid_status:
         raise ValueError("Invalid status")
+    
+    email_pattern = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.com"
+    if not re.match(email_pattern, email):
+        raise ValueError("Invalid email format")
+
     
     last_updated = datetime.datetime.now().isoformat("T", "seconds")
 
@@ -142,7 +148,7 @@ elif args.command == "list":
             table = Table(title="Students")
 
             table.add_column("ID", style="cyan", justify="right")
-            table.add_column("Name", style="green")
+            table.add_column("Name")
             table.add_column("Email")
             table.add_column("Major")
             table.add_column("GPA", justify="right")
@@ -155,7 +161,7 @@ elif args.command == "list":
                     s["name"],
                     s["email"],
                     s["major"],
-                    f"{s['gpa']:.2f}",
+                    f"{s['gpa']:.1f}",
                     s["status"],
                     s["last_updated"] or "-"
                 )
@@ -170,14 +176,12 @@ elif args.command == "find-major":
 
     if not students:
         console.print(
-            f"No students found in major '{args.major}'.",
-            style="yellow"
-        )
+            f"No students found in major '{args.major}'", style="yellow")
     else:
         table = Table(title=f"Students in {args.major}")
 
         table.add_column("ID", style="cyan", justify="right")
-        table.add_column("Name", style="green")
+        table.add_column("Name")
         table.add_column("Email")
         table.add_column("GPA", justify="right")
         table.add_column("Status")
@@ -187,7 +191,7 @@ elif args.command == "find-major":
                 str(s["id"]),
                 s["name"],
                 s["email"],
-                f"{s['gpa']:.2f}",
+                f"{s['gpa']:.1f}",
                 s["status"]
             )
 
