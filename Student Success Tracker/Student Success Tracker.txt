@@ -1,0 +1,40 @@
+# Student Success Tracker
+
+You now understand how to talk to SQLite and how to isolate dependencies with virtual environments. Put everything together by delivering a production-ready student success tracker CLI. Follow the spec below exactly and treat this document as client requirements.
+
+## 1. Environment & Tooling
+- Create a virtual environment named `.venv` inside this folder, activate it, and install `rich` (for nicer CLI output) plus any other packages you truly need.
+- Capture the dependency snapshot with `pip freeze > requirements.txt`.
+- All scripts must assume the virtual environment is active before execution.
+
+## 2. Database Schema
+- Use SQLite with a file named `success_tracker.db`.
+- Table: `students` with columns `id (PK AUTOINCREMENT)`, `name (TEXT NOT NULL)`, `email (TEXT UNIQUE NOT NULL)`, `major (TEXT NOT NULL)`, `gpa (REAL CHECK BETWEEN 0 AND 4)`, `status (TEXT CHECK IN ['active','probation','graduated'] DEFAULT 'active')`, `last_updated (TEXT ISO timestamp)`.
+- Enforce schema creation with `CREATE TABLE IF NOT EXISTS` when the CLI starts.
+
+## 3. CLI Functional Goals
+Build a command-line interface called `success_tracker.py` that exposes the subcommands below (use `argparse` or `typer`). Every command should print a helpful confirmation using `rich`.
+
+1. `init-db` — Create the table and optionally seed it with two demo students (guard against duplicate inserts).
+2. `add` — Accept `--name`, `--email`, `--major`, `--gpa`, optional `--status`. Validate GPA range and supported statuses before inserting. Print the new student ID.
+3. `list` — Display every student as a table sorted by GPA desc. Accept optional `--status` filter.
+4. `find-major` — Require a major argument and print matching students (or state that none exist).
+5. `update-gpa` — Accept `--id` and `--gpa`, update both the `gpa` and `last_updated` columns.
+6. `delete` — Accept `--id` and delete that student, reporting how many rows were removed.
+
+## 4. Implementation Constraints
+- Wrap every database operation in helper functions (e.g., `add_student`, `get_students`, `update_gpa`).
+- Use context managers (`with sqlite3.connect(...) as conn`) and parameterized queries.
+- Set `conn.row_factory = sqlite3.Row` where appropriate to allow dictionary-like access.
+- Whenever a command finishes, print a success/failure message plus a count of affected rows.
+- Logically separate CLI parsing from database logic to keep functions testable.
+
+## 5. Deliverables
+- `success_tracker.py` implementing all commands.
+- `requirements.txt` generated from your virtual environment.
+- A short README snippet (3–5 lines) appended to the main Day 12 README describing how to run this tracker (optional stretch if time remains).
+
+## Submission Checklist
+- [ ] Virtual environment exists and dependencies installed.
+- [ ] All commands run without crashing (`python success_tracker.py <command>`).
+- [ ] SQL is parameterized; GPA/status validations work.
