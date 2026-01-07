@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main>
+            <div class="form__bg">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="flash">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                {% if errors %}
+                    <ul class="error">
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <form class="form" action="{{ url_for('func')}}" method="POST">
+                    <label class="form__label" for="name">Name:</label>
+                    <input class="form__input" type="text" id="name" name="name" placeholder="Enter your name" value="{{ form_data.name if form_data is defined else '' }}" required>
+                    
+                    <label class="form__label" for="email">Email:</label>
+                    <input class="form__input" type="email" id="email" name="email" placeholder="name@email.com" value="{{ form_data.email if form_data is defined else '' }}" required>
+                    
+                    <label class="form__label" for="password">Password:</label>
+                    <input class="form__input" type="password" id="password" name="password" placeholder="Enter a password" required> 
+                    
+                    <label class="form__label" for="confirm-password">Confirm password:</label>
+                    <input class="form__input" type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" required> 
+                    
+                    <label class="form__label" for="bio">Bio:</label>
+                    <textarea class="form__input" id="bio" name="bio" placeholder="Tell us a little about yourself" rows="4">{{ form_data.bio if form_data is defined else '' }}</textarea>
+                    
+                    <div>
+                    <label class="form__label" for="terms">Agree to terms:</label>
+                    <input type="checkbox" id="terms" name="terms" value="agree" {% if form_data.terms %}checked{% endif %} required>
+                    </div>
+                    <br>
+                    <button class="form__btn" type="submit">Submit</button>
+            </form>
+        </div>  
+    </main>
+</body>
+</html>

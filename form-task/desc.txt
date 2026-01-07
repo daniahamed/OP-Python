@@ -1,0 +1,78 @@
+## Step 1: Project Setup
+
+1. Create a new file named `app.py` in this folder.
+2. Initialize a Flask app and set a `SECRET_KEY`.
+3. Add a single route `/` that supports `GET` and `POST`.
+
+---
+
+## Step 2: Build the HTML Form
+
+Create a form with these fields:
+
+- Name (text)
+- Email (email)
+- Password (password)
+- Confirm Password (password)
+- Bio (textarea, minimum 20 chars)
+- Agree to Terms (checkbox)
+
+Requirements:
+
+- Use the correct `name` for each input.
+- Use `method="post"` in the form.
+- Add `required` on all fields except the bio.
+
+---
+
+## Step 3: Read Form Data
+
+In your route:
+
+1. On POST, read submitted values using `request.form.get()`.
+2. Strip whitespace for text fields.
+3. Store values in a dictionary called `form_data`.
+
+---
+
+## Step 4: Validate Inputs
+
+Create a `validate(form_data)` function that returns a list of errors:
+
+Validation rules:
+
+- Name is required.
+- Email must include `@`.
+- Password is at least 8 characters.
+- Confirm password must match password.
+- Bio must be at least 20 characters if provided.
+- Agree to Terms must be checked.
+
+---
+
+## Step 5: Show Errors Inline
+
+If validation fails:
+
+1. Re-render the form.
+2. Display errors near the form.
+3. Refill the inputs with the user’s previous values (except password).
+
+---
+
+## Step 6: Flash + Redirect
+
+If validation passes:
+
+1. `flash()` a success message.
+2. Redirect back to `/` (Post/Redirect/Get).
+3. Show the flashed message at the top of the form.
+
+
+## Step 7: Final Checklist
+
+- Form uses POST and route accepts POST.
+- Inputs have `name` attributes.
+- Server-side validation is implemented.
+- Errors are displayed to the user.
+- Successful POST redirects and flashes a message.

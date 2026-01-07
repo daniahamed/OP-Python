@@ -198,6 +198,29 @@ elif args.command == "find-major":
         console.print(table)
 
 
+# python3 success_tracker.py init_db
+# python3 success_tracker.py add --name Haya --email haya@gmail.com --major cs --gpa 3.6
+# python3 success_tracker.py add --name Ali --email ali@gmail.com --major cis --gpa 3.2 --status probation
+# python3 success_tracker.py add --name Muna --email muna@gmail.com --major cis --gpa 2.8
+# python3 success_tracker.py add --name Muna --email munagmail.com --major cis --gpa 2.8
+
+# python3 success_tracker.py list
+
+# python3 success_tracker.py update-gpa --id 2 --gpa 3.5
+# python3 success_tracker.py update-gpa --id 2 --gpa 5
+
+# python3 success_tracker.py list
+
+# python3 success_tracker.py find-major --major cis
+# python3 success_tracker.py find-major --major physics
+
+# python3 success_tracker.py delete --id 3
+
+# decorators + main 
+
+
+
+
 
 
 
