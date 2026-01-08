@@ -1,0 +1,61 @@
+## Task Instructions
+
+### Step 1: Project Setup
+
+1. Create a new folder and virtual environment  
+2. Install required packages:
+   - `flask`
+   - `flask_sqlalchemy`
+   - `flask_migrate`
+   - `python-dotenv`
+3. Use SQLite 
+---
+
+### Step 2: App Factory + Config
+
+- Use an **app factory** to create the Flask app  
+- Configure the app with **database URI** and **secret key**  
+- Initialize **SQLAlchemy** and **Flask-Migrate**  
+
+---
+
+### Step 3: Models
+
+- Create two models: `Library` and `Book`  
+- Define a **one-to-many relationship**: a library can have many books  
+- Add relevant fields:
+  - `Library`: `id`, `name`  
+  - `Book`: `id`, `title`, `author`, `library_id`, `created_at`  
+
+---
+
+### Step 4: CRUD Routes
+
+- Create routes for **libraries**:
+  - Create, list, update, delete  
+- Create routes for **books**:
+  - Create, list, update, delete  
+- Use **JSON requests and responses**  
+
+---
+
+### Step 5: Migrations
+
+- Initialize **Flask-Migrate**  
+- Create initial migration for the tables  
+- Apply migrations to the database  
+
+---
+
+### Step 6: Run the App
+
+- Use a `run.py` file to start the Flask app  
+- Test CRUD routes using **Postman**, **curl**, or a browser  
+
+---
+
+### Step 7: Additional Features
+
+- Filter books by library  
+- Search books by title or author
+- Get all books under a library
